@@ -148,6 +148,17 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Nix maintenance + flakes
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
+  nix.settings = {
+    auto-optimise-store = true;
+    experimental-features = [ "nix-command" "flakes" ];
+  };
+
   # Zsh + terminal tooling
   users.defaultUserShell = pkgs.zsh;
   programs.zsh = {
