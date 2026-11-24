@@ -148,9 +148,25 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Zsh + terminal tooling
   users.defaultUserShell = pkgs.zsh;
-  # Zsh
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+  };
+  programs.starship.enable = true;          # prompt, config in ~/.config/starship.toml
+  programs.fzf = { keybindings = true; fuzzyCompletion = true; };  # ctrl+r / ctrl+t / alt+c
+  environment.systemPackages = with pkgs; [
+    zoxide    # smarter cd (z)
+    eza       # ls replacement with icons
+    bat       # cat with syntax highlighting
+    fd
+    ripgrep
+    fastfetch
+  ];
+  fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
   # Docker
   virtualisation.docker.enable = true;
