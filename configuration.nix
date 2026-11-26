@@ -114,6 +114,8 @@
       neovim
       ghostty
       zsh
+      lazydocker
+      libreoffice-fresh
       # jdk17
       # jdk21
       # nodejs
